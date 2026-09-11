@@ -1,0 +1,18 @@
+services:
+  omniroute:
+    image: diegosouzapw/omniroute:latest
+    container_name: omniroute
+    restart: unless-stopped
+    stop_grace_period: 40s
+    ports:
+      - "20128:20128"
+    environment:
+      INITIAL_PASSWORD: "${INITIAL_PASSWORD:-CHANGE_ME_NOW}"
+      OMNIROUTE_MEMORY_MB: "512"
+      NODE_OPTIONS: "--max-old-space-size=512"
+      DATA_DIR: "/app/data"
+    volumes:
+      - omniroute-data:/app/data
+
+volumes:
+  omniroute-data:

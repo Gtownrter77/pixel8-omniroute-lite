@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: omniroute-lite
+    runtime: image
+    image:
+      url: diegosouzapw/omniroute:latest
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: "20128"
+      - key: OMNIROUTE_MEMORY_MB
+        value: "384"
+      - key: NODE_OPTIONS
+        value: "--max-old-space-size=384"
+      - key: INITIAL_PASSWORD
+        generateValue: true
+    disk:
+      name: omniroute-data
+      mountPath: /app/data
+      sizeGB: 1
